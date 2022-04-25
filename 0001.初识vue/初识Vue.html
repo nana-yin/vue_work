@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div v-pre>写的什么，就渲染什么。加快编译</div>
+    <h2 v-once>初始化的数据:{{n}}</h2>
+    <h2>当前的数据:{{n}}</h2>
+    <button @click="n++">点我n+1</button>
+  </div>
+  <script type="text/javaScript">
+    Vue.config.productionTip = false
+    Vue.filter('quanju', function (params) {
+      return '11'
+    })
+    const vm = new Vue({
+      // el: '#root',
+      data: {
+        n: 1
+      },
+      methods: {
+      },
+      filters:{
+        jubu(val) {
+          return '145'
+        }
+      }
+    })
+
+    vm.$mount('#root')
+
+  </script>
+</body>
+</html>

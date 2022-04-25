@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <div v-pre>写的什么，就渲染什么。加快编译</div>
+    <h2 v-once>初始化的数据:{{n}}</h2>
+    <h2>当前的数据:{{n}}</h2>
+    <h2>放大10倍的数据:
+      <span v-big-number="n">{{n}}</span>
+    </h2>
+    <button @click="n++">点我n+1</button>
+    <hr/>
+    <input type="text" v-fbind:value="n">
+
+    <br/><br/>
+    <button id="btn">点我创建一个输入框</button>
+    <div class="inputDom"></div>
+  </div>
+  <script type="text/javaScript">
+    Vue.config.productionTip = false
+    // Vue.filter('quanju', function (params) {
+    //   return '11'
+    // })
+    // Vue.directive('全局指令', {
+    //   bind(element,binding) {
+    //     element.value = binding.value
+    //   }
+    // })
+    const vm = new Vue({
+      // el: '#root',
+      data: {
+        n: 1
+      },
+      methods: {
+      },
+      // filters:{
+      //   jubu(val) {
+      //     return '145'
+      //   }
+      // },
+      directives: {
+        'big-number'(element,binding) {
+          // element ==> 真实dom
+          // binding ==> 元素和指令的关联关系
+          element.innerText = binding.value * 10
+        },
+        fbind: {
+          // 指令和元素成功绑定时
+          // this是window
+          bind(element,binding) {
+            element.value = binding.value
+          },
+          // 指令所在的元素被插入页面时
+          inserted(element,binding) {
+            element.focus()
+          },
+          // 指令所在的模板重新解析时
+          update(element,binding) {
+            element.value = binding.value
+          },
+        }
+      }
+    })
+
+    vm.$mount('#root')
+
+
+
+    // JS代码
+    const btn = document.getElementById('btn')
+    btn.onclick = () => {
+      let inputDom = document.createElement('input')
+      let inputDiv = document.getElementsByClassName('inputDom')[0]
+      inputDiv.appendChild(inputDom)
+      inputDom.focus()
+    }
+
+  </script>
+</body>
+</html>
