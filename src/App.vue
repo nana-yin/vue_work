@@ -1,30 +1,39 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-wrap">
-      <MyHeader/>
-      <MyList/>
-      <MyFooter/>
-    </div>
+  <div class="box">
+    <h2>你好啊，学生年龄是{{studentAge}}</h2>
+    <School @getAddress="getAddress"/>
+    <Student ref="stu"/>
   </div>
 </template>
 
 <script>
-import MyHeader from '@/components/myHeader.vue'
-import MyFooter from '@/components/myFooter.vue'
-import MyList from '@/components/myList.vue'
+import School from '@/components/school.vue'
+import Student from '@/components/student.vue'
 export default {
   components: {
-    MyHeader,
-    MyFooter,
-    MyList
+    School,
+    Student
   },
   data() {
     return {
+      studentAge: 10
     }
   },
   methods: {
-    handleBtn() {
+    getAddress(val) {
+      console.log('显示学校地址', val)
+    },
+    getStudentAge(val, ...arg) {
+      this.studentAge = val
+      console.log('显示学生的年龄', val, arg)
     }
+  },
+  mounted() {
+    this.$refs.stu.$on('showStudentAge', this.getStudentAge)
+    // this.$refs.stu.$on('showStudentAge', function() {
+    //   // 这里面的this是student的组件实例对象，要想变为App的组件实例对象，需要使用箭头函数
+    // })
+    // this.$refs.stu.$once('showStudentAge', this.getStudentAge)
   }
 }
 </script>
