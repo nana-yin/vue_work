@@ -38,5 +38,8 @@ export default {
 </script>
 
 <style>
-
+.student {
+  padding: 20px;
+  background: pink;
+}
 </style>

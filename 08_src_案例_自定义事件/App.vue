@@ -2,7 +2,7 @@
   <div class="todo-container">
     <div class="todo-wrap">
       <MyHeader @addTodo="addTodo"/>
-      <MyList :todos="todos"/>
+      <MyList :todos="todos" :checkTodo="checkTodo" :deleteTodo="deleteTodo"/>
       <MyFooter :todos="todos" @handleCheck="handleCheck" @clearAllTodo="clearAllTodo"/>
     </div>
   </div>
@@ -31,13 +31,6 @@ export default {
       immediate: true,
       deep: true
     }
-  },
-  mounted() {
-    this.$bus.$on('checkTodo',this.checkTodo)
-    this.$bus.$on('deleteTodo',this.deleteTodo)
-  },
-  beforeDestroy() {
-    this.$bus.off(['checkTodo', 'deleteTodo'])
   },
   methods: {
     handleBtn() {
