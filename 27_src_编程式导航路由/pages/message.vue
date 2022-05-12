@@ -41,9 +41,6 @@ export default {
       }]
     }
   },
-  beforeDestroy() {
-    console.log('News中的页面内容即将呗销毁')
-  },
   methods: {
     pushRoute(val) {
       this.$router.push({
@@ -68,4 +65,7 @@ export default {
 </script>
 
 <style>
+h2 {
+  text-align: center;
+}
 </style>
