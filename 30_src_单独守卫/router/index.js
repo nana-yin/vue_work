@@ -8,8 +8,6 @@ import Detail from '../pages/detail'
 
 // 一级路由加/,子路由无需加/
 const router =  new VueRouter({
-  // hash模式，不会将#之后的路径传给后端，只是前端自己的路径
-  // mode: 'history',
   routes: [
     {
       name: 'shouye',

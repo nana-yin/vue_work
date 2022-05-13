@@ -15,7 +15,7 @@ export default {
     // 该组件的实例中$route是只属于该组件的，但是里面中的$srouter是全局的
   },
   beforeDestroy() {
-    console.log('Home中的页面内容即将被销毁')
+    console.log('Home中的页面内容即将呗销毁')
   }
 }
 </script>

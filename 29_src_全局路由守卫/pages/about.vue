@@ -24,21 +24,7 @@
 export default {
   name: 'About',
   beforeDestroy() {
-    console.log('About中的页面内容即将被销毁')
-  },
-  // 组件路由守卫，根据路由规则，进入组件之前触发
-  beforeRouteEnter(to,from,next) {
-    console.log('进入About组件', to,from)
-    if(to.meta.isAuth) { // 用于鉴权
-      alert('暂无权限查看！')
-    } else {
-      next()
-    }
-  },
-  // 组件路由守卫，根据路由规则，离开组件之前触发
-  beforeRouteLeave(to,from, next) {
-    console.log('离开About组件', to,from)
-    next()
+    console.log('About中的页面内容即将呗销毁')
   }
 }
 </script>
