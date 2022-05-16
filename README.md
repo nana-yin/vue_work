@@ -1,4 +1,4 @@
-# vue2总结
+# vue2+vue3总结
 
 ## Project setup
 ```
