@@ -1,4 +1,4 @@
-# vue_test
+# vue2总结
 
 ## Project setup
 ```
