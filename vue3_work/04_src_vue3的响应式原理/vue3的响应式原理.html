@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    let person = {
+      name: '张三',
+      age: 18
+    }
+
+    //#region 
+    // let p = {}
+    // vue2实现的响应式原理，对于 增/删 属性无法监测到
+    // Object.defineProperty(p, 'name', {
+    //   configurable: true,
+    //   get() {
+    //     console.log('Object——name读取数据')
+    //     return person.name
+    //   },
+    //   set(value) {
+    //     console.log('Object——name修改数据，更新页面!')
+    //     person.name = value
+    //   }
+    // })
+    // Object.defineProperty(p, 'age', {
+    //   configurable: true,
+    //   get() {
+    //     console.log('Object——age读取数据')
+    //     return person.age
+    //   },
+    //   set(value) {
+    //     console.log('Object——age修改数据，更新页面!')
+    //     person.age = value
+    //   }
+    // })
+    //#endregion
+
+    // vue3实现的响应式原理:
+    // 通过proxy（代理）：拦截对象中任意属性的变化。
+    // 通过Reflect（反射）：对源对象的属性进行操作。
+    let p  = new Proxy(person, {
+      get(target, properName) {
+        console.log('Proxy——读取数据')
+        // return target[properName]
+        return Reflect.get(target, properName)
+      },
+      set(target, properName,value) {
+        console.log('Proxy——修改或者新增数据')
+        // target[properName] = value
+        Reflet.set(target, properName,value)
+      },
+      deleteProperty(target, properName) {
+        console.log('Proxy——删除数据')
+        // return delete target[properName]
+        return Reflect.deleteProperty(target, properName)
+      } 
+    })
+
+
+    // 通过Object.defineProperty来操作数据
+    //#region 
+    // let obj = {
+    //   a: 1,
+    //   b: 2
+    // }
+    // Object.defineProperty(obj, 'c', {
+    //   get() {
+    //     return 3
+    //   }
+    // })
+    // // 会报错，错误不好捕获
+    // Object.defineProperty(obj, 'c', {
+    //   get() {
+    //     return 4
+    //   }
+    // })
+    //#endregion
+
+    // 通过Reflect.defineProperty来操作数据
+    // 不会报错，以第一个操作的数据为准
+    //#region
+    // const x1 = Reflect.defineProperty(obj, 'c', {
+    //   get() {
+    //     return 3
+    //   }
+    // })
+    // console.log(x1) // true
+
+    // const x2 = Reflect.defineProperty(obj, 'c', {
+    //   get() {
+    //     return 4
+    //   }
+    // })
+    // console.log(x2) // false
+    //#endregion
+
+  </script>
+</body>
+</html>
