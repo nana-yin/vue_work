@@ -8,6 +8,7 @@
     </slot>
     <!-- <slot :games="games" hello="你好" name="haha">
       这是默认文字，作用域插槽。
+      在父组件中使用子组件的数据。
       作用域插槽也可以有名字，当写了名字的时候，要在父组件中使用slot="haha"。
     </slot> -->
   </div>
