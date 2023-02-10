@@ -1,4 +1,4 @@
-# vue2+vue3学习总结
+# vue2、vue3文件夹为学习文件，src为学习的基础包，其余的文件夹为项目文件
 
 ## Project setup
 ```
