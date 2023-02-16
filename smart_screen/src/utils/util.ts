@@ -78,9 +78,14 @@ export function accuracyCalc (value: any, conversion: number, accuracy: number) 
  * @return {string}
  */
 export const getLocationParams = () => {
-  const str = window.location.search
-    ? window.location.search.split('?')[1]
-    : ''
+  let str = ''
+  if (window.location.search) {
+    str = window.location.search.split('?')[1]
+  } else if (window.location.hash) {
+    str = window.location.hash.split('?') && window.location.hash.split('?')[1]
+  } else {
+    str = window.location.href.split('?') && window.location.href.split('?')[1]
+  }
   const paramObj = {} as {
     sessionId: string;
     storeId: string;

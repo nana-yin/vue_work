@@ -114,7 +114,7 @@ export default defineComponent({
             // 如果大于一万，则缩写成  X万
             data.gridSideList[0].data = !isEmpty(powerTotal)
               ? parseFloat(powerTotal) >= 10000
-                ? accuracyCalc(powerTotal, 10000, 1)
+                ? accuracyCalc(powerTotal, 0.0001, 1)
                 : parseFloat(powerTotal).toFixed(1)
               : '-'
             data.gridSideList[0].unit = !isEmpty(powerTotal)
@@ -138,7 +138,7 @@ export default defineComponent({
         {
           name: '装机容量',
           data: '-',
-          unit: 'kW'
+          unit: 'kWp'
         },
         {
           name: '发电量',
@@ -182,7 +182,7 @@ export default defineComponent({
             // 如果大于一万，则缩写成  X万
             data.photovoltaicList[2].data = !isEmpty(carbonReduction)
               ? parseFloat(carbonReduction) >= 10000
-                ? accuracyCalc(carbonReduction, 10000, 1)
+                ? accuracyCalc(carbonReduction, 0.0001, 1)
                 : parseFloat(carbonReduction).toFixed(1)
               : '-'
             data.photovoltaicList[2].unit = !isEmpty(carbonReduction)
@@ -204,7 +204,7 @@ export default defineComponent({
         {
           name: '装机容量',
           data: '-',
-          unit: 'kW'
+          unit: 'kWh'
         },
         {
           name: '充电量',
@@ -384,6 +384,7 @@ export default defineComponent({
             type: 'value',
             name: 'kWh',
             nameGap: 22,
+            splitNumber: 3,
             nameTextStyle: {
               fontSize: 24,
               color: '#999',
@@ -406,6 +407,7 @@ export default defineComponent({
             type: 'value',
             name: 'kW',
             nameGap: 22,
+            splitNumber: 3,
             nameTextStyle: {
               fontSize: 24,
               color: '#999',
@@ -518,6 +520,7 @@ export default defineComponent({
           {
             type: 'value',
             name: 'kWh',
+            splitNumber: 2,
             nameGap: 22,
             nameTextStyle: {
               fontSize: 24,
@@ -541,6 +544,7 @@ export default defineComponent({
             type: 'value',
             name: 'kW',
             nameGap: 22,
+            splitNumber: 2,
             nameTextStyle: {
               fontSize: 24,
               color: '#999',

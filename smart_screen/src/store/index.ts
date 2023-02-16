@@ -1,3 +1,4 @@
+// 废弃
 import { createStore } from 'vuex'
 
 export default createStore({

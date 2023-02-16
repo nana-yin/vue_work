@@ -7,7 +7,6 @@
 import axios, { AxiosRequestHeaders } from 'axios'
 import qs from 'qs'
 import { message } from 'ant-design-vue'
-import store from '@/store'
 
 export let timestamp: number = new Date().getTime() / 1000 // 当前的时间戳
 
@@ -26,9 +25,7 @@ https.interceptors.request.use(config => {
     'Content-Type': 'application/json;charset=UTF-8',
     Timestamp: timestamp
   } as unknown as AxiosRequestHeaders
-  if (store && store.state && store.state.sessionId) {
-    config.headers.Authorization = store.state.sessionId
-  }
+  config.headers.Authorization = sessionStorage.getItem('sessionId')
   headers = config.headers
   return config
 })
@@ -47,8 +44,25 @@ const handleRequest = (request: any) => {
     request
       .then((resp: { data: any; status: string | number; error: string }) => {
         const { data, status, error } = resp
-        if (!data) {
-          reject(createError(status, error))
+        if (!data.success) {
+          if ((data.msgCode === '2') && (data.msgInfo === '登录过期,请重新登录')) { // 对登录过期单独进行处理
+            let url = ''
+            if (
+              process.env.VUE_APP_BASE_API == '/api' ||
+              process.env.VUE_APP_BASE_API == 'http://10.0.103.112:80'
+            ) {
+              // 本地或者测试服
+              url = 'http://10.0.103.112/login.html#/user/login'
+              // url = 'http://localhost:9090/login.html#/user/login'
+            } else {
+              // 生产服
+              url = 'https://ele.qre.com.cn/login.html#/user/login'
+            }
+            window.location.href=url
+            return false
+          } else {
+            reject(createError(status, error))
+          }
         } else {
           resolve(data)
         }

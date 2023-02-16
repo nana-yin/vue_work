@@ -5,7 +5,7 @@ import store from './store'
 // 引入路由
 import router from './router'
 // 局部引入ui组件
-import { Button, Select, SelectOption, Progress } from 'ant-design-vue'
+import { Button, Select, SelectOption, Progress, Spin } from 'ant-design-vue'
 // 引入ui样式
 import 'ant-design-vue/dist/antd.css'
 
@@ -41,6 +41,7 @@ app
   .use(Select)
   .use(SelectOption)
   .use(Progress)
+  .use(Spin)
   .use(router)
   .use(store)
   .mount('#app')

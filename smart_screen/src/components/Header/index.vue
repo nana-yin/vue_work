@@ -43,7 +43,8 @@ export default defineComponent({
     const paramObj = getLocationParams()
     const defineData = reactive({
       storeInfo: {
-        name: '企业综合能源管理大脑',
+        // name: '企业综合能源管理大脑',
+        name: '智慧能源',
         logoUrl:
           'https://upload.qre.com.cn/photo/240696/9171514439186018/f77a287c8d72a1c9@w422_h323.jpg'
       }, // 企业的基本信息
@@ -104,14 +105,14 @@ export default defineComponent({
       let url = ''
       if (
         process.env.VUE_APP_BASE_API == '/api' ||
-        process.env.VUE_APP_BASE_API == 'http://10.0.103.112:80/visualization'
+        process.env.VUE_APP_BASE_API == 'http://10.0.103.112:80'
       ) {
         // 本地或者测试服
-        url = 'http://10.0.103.112/login.html#/user/login'
-        // url = 'http://localhost:9090/login.html#/user/login'
+        url = 'http://10.0.103.112'
+        // url = 'http://localhost:9090'
       } else {
         // 生产服
-        url = 'https://ele.qre.com.cn/login.html#/user/login'
+        url = 'https://ele.qre.com.cn'
       }
       switch (name) {
         case '首页':

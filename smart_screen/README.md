@@ -1,4 +1,4 @@
-# Vue3+Ts+Webpack5.0编写的大屏项目
+# vue3_work
 
 ## Project setup
 ```

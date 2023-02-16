@@ -108,6 +108,11 @@ export default defineComponent({
   .single {
     position: relative;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
     &-title {
       width: 120px;
       height: 24px;

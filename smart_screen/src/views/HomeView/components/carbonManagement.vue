@@ -63,7 +63,7 @@
     <div class="progress-text">
       <div class="progress-text__left">
         已排{{ carbonIndex.count }}吨<span class="small-text"
-          >/指标{{ carbonIndex.alreadyDischarged }}吨</span
+          >/指标{{ carbonIndex.alreadyDischarged }}万吨</span
         >
       </div>
       <div class="progress-text__right">
@@ -168,11 +168,11 @@ export default defineComponent({
             data.infoList[0].yearOnTrend =
               yearOnYear !== '-' ? (parseFloat(yearOnYear) > 0 ? 1 : -1) : 0
 
-            data.carbonIndex.count = !isEmpty(target)
-              ? parseFloat(target).toFixed(1)
-              : '-'
-            data.carbonIndex.alreadyDischarged = !isEmpty(nowCarbon)
+            data.carbonIndex.count = !isEmpty(nowCarbon)
               ? parseFloat(nowCarbon).toFixed(1)
+              : '-'
+            data.carbonIndex.alreadyDischarged = !isEmpty(target)
+              ? parseFloat(target).toFixed(1)
               : '-'
             data.carbonIndex.nowPercent = !isEmpty(emissionRate)
               ? parseFloat(emissionRate).toFixed(1)

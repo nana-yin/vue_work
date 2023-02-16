@@ -14,13 +14,19 @@ const getPhotovoltaicBarLine = (
 ) => {
   const option = {
     tooltip: {
-      trigger: 'axis'
+      trigger: 'axis',
+      textStyle: {
+        fontSize: 24
+      },
+      confine: true
     },
     grid: {
       top: 52,
-      left: 56,
+      // left: 56,
+      left: 0,
+      // right: 40,
+      right: 10,
       bottom: 48,
-      right: 40,
       containLabel: true
     },
     legend: {
@@ -82,13 +88,19 @@ const getEnergyStorageBarLine = (
 ) => {
   const option = {
     tooltip: {
-      trigger: 'axis'
+      trigger: 'axis',
+      textStyle: {
+        fontSize: 24
+      },
+      confine: true
     },
     grid: {
       top: 52,
-      left: 56,
       bottom: 48,
-      right: 40,
+      // left: 56,
+      left: '2%',
+      // right: 40,
+      right: 10,
       containLabel: true
     },
     legend: {
@@ -159,22 +171,26 @@ const getElectricityConsumptionChart = (
     },
     tooltip: {
       trigger: 'axis',
+      textStyle: {
+        fontSize: 24
+      },
       formatter: (params: any) => {
-        let html = `<div style="margin-bottom:10px;text-align:center;font-size: 14px;color: #333;">${params[0].axisValue}`
+        let html = `<div style="margin-bottom:10px;text-align:center;font-size: 24px;color: #333;">${params[0].axisValue}`
         for (let i = 0; i < params.length; i++) {
           const { data, seriesName, color } = params[i]
           html += `<div style="display:flex;flex-wrap: nowrap;align-items: center;">
                       <div style='width: 10px;height: 10px;margin-right: 6px;border-radius: 5px;background:${
                         color.colorStops ? color.colorStops[0].color : color
                       };'></div>
-                      <div style="font-size: 14px;color: #333;">${seriesName}：${
+                      <div style="font-size: 24px;color: #333;">${seriesName}：${
             !isEmpty(data) ? data.toFixed(2) : '-'
           }</div>
                     </div>`
         }
         html += '</div>'
         return html
-      }
+      },
+      confine: true
     },
     grid: {
       top: 120,
@@ -229,6 +245,7 @@ const getElectricityConsumptionChart = (
           fontSize: 24,
           color: '#999'
         },
+        splitNumber: 4,
         splitLine: {
           show: true,
           lineStyle: {
@@ -270,7 +287,11 @@ const getEnergyConsumptionChart = (
       }
     },
     tooltip: {
-      trigger: 'item'
+      trigger: 'item',
+      textStyle: {
+        fontSize: 24
+      },
+      confine: true
     },
     legend: {
       data: legendData,
@@ -329,9 +350,14 @@ const getEnergyConsumptionChart = (
         tooltip: {
           valueFormatter: function (value: number | string) {
             return value + 'kWh'
-          }
+          },
+          textStyle: {
+            fontSize: 24
+          },
+          confine: true
         },
-        data: seriesData
+        data: seriesData,
+        confine: true
       }
     ]
   }
@@ -349,7 +375,11 @@ const getStatisticsChart = (xData: string[], seriesData: any[]) => {
       trigger: 'axis',
       axisPointer: {
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-      }
+      },
+      textStyle: {
+        fontSize: 24
+      },
+      confine: true
     },
     grid: {
       top: 12,
@@ -425,7 +455,11 @@ const getRankingChart = (
       trigger: 'axis',
       axisPointer: {
         type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
-      }
+      },
+      textStyle: {
+        fontSize: 24
+      },
+      confine: true
     },
     dataZoom: [
       {
@@ -433,8 +467,9 @@ const getRankingChart = (
         yAxisIndex: [0, 1],
         show: false, // 是否显示滑动条，不影响使用
         type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-        startValue: 100, // 从末尾开始--进行倒序
-        endValue: 4, // 一次性展示5个
+        start: 100, // 默认显示0%
+        // startValue: 2000000, // 从末尾开始--进行倒序
+        // endValue: 4, // 一次性展示5个
         width: 6,
         borderColor: 'transparent',
         fillerColor: 'rgba(205,205,205,1)',
@@ -458,6 +493,7 @@ const getRankingChart = (
       {
         type: 'inside',
         yAxisIndex: [0, 1],
+        start: 0, // 默认显示0%
         zoomOnMouseWheel: false, // 滚轮是否触发缩放
         moveOnMouseMove: true, // 鼠标滚轮触发滚动
         moveOnMouseWheel: true
@@ -479,7 +515,7 @@ const getRankingChart = (
     },
     grid: {
       top: 74,
-      left: 0,
+      left: 10,
       bottom: 63,
       right: 0,
       containLabel: true
@@ -509,7 +545,10 @@ const getRankingChart = (
           fontSize: 24,
           color: '#999',
           margin: 13,
-          align: 'left'
+          align: 'left',
+          formatter: (val: string) => {
+            return (val && val.length) > 4 ? val.slice(0, 4) + '...' : val
+          }
         },
         splitLine: {
           show: false
