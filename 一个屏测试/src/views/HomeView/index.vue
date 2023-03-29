@@ -1,7 +1,7 @@
 <template>
   <div class="box">
       <div class="boxChild one">
-        <video class="videoStyle" src="@/views/video/4.mp4" autoplay muted loop></video>
+        <video class="videoStyle" src="@/views/video/4.mp4" controls disablePictureInPicture loop="false" width="100%" height="260px"></video>
       </div>
       <div class="boxChild two">
         <video class="videoStyle" src="@/views/video/3.mp4" autoplay muted loop></video>
@@ -43,6 +43,9 @@ export default defineComponent({
       img.onload = function () {
         document.body.style.backgroundImage = "url(" + img.src + ")";
       }
+      // 去除视频的下载按钮  nofullscreen 关闭放大按钮
+      document.getElementsByClassName("videoStyle")[0].setAttribute("controlsList","nodownload"); 
+
       let childDom = document.getElementsByClassName("boxChild")
       if (paramObj.index) { // 有需要缩放的页面
         let echoDom = childDom[index] as HTMLElement
